@@ -12,7 +12,7 @@
     </section>
     <section class="hero grid-container pt-5 px-5 h-100">
       <div class="hero-head">
-        <h2>Subscriptions</h2>
+        <h2 class="subscription-heading">Subscriptions</h2>
         <b-button class="mt-1 ml-3" size="is-small" icon-pack="fal" icon-right="plus" />
       </div>
 			<div class="hero-body">
@@ -49,6 +49,9 @@ export default {
 
 <style scoped>
 .content {
+}
+.subscription-heading {
+  float: left;
 }
 .content-top {
   background-color: #F5F5F5;

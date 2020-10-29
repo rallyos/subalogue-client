@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
+import Landing from './Landing.vue'
 import App from './App.vue'
 
 Vue.config.productionTip = false
@@ -8,6 +9,24 @@ Vue.use(Buefy, {
   defaultIconPack: 'fas',
 });
 
-new Vue({
-  render: function (h) { return h(App) },
+const routes = {
+	'/': Landing,
+  '/app': App,
+}
+
+const app = new Vue({
+  el: '#app',
+  data: {
+    currentRoute: window.location.pathname
+  },
+  computed: {
+    ViewComponent () {
+      return routes[this.currentRoute]// || NotFound
+    }
+  },
+  render (h) { return h(this.ViewComponent) }
 }).$mount('#app')
+
+window.addEventListener('popstate', () => {
+  app.currentRoute = window.location.pathname
+})
