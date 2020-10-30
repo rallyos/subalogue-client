@@ -8,11 +8,11 @@
 				</div>
 			</div>
 			<div class="level-right">
-				<a href="" class="sign-in-link mt-5"><h2>sign in</h2></a>
+				<a href="http://localhost:8000/auth/login" class="sign-in-link mt-5"><h2>sign in</h2></a>
 			</div>
     </nav>
 		<div class="columns larger-p">
-      <div class="column">
+      <div class="column has-z-index">
         <div class="hero mt-6 px-5">
           <div class="hero-head">
             <h1>Manage your subscriptions</h1>
@@ -24,7 +24,11 @@
             </p>
           </div>
           <div class="hero-foot has-text-centered">
-            <b-button size="is-large"
+            <b-button
+                tag="a"
+                href="http://localhost:8000/auth/login"
+								type="is-primary"
+								size="is-large"
 								icon-pack="fad"
                 icon-right="portal-enter">
                 Try it
@@ -36,7 +40,7 @@
       </div>
 		</div>
 		<div class="columns is-centered">
-			<div class="column is-3 has-text-centered">
+			<div class="column is-3 has-text-centered has-z-index">
 				<b-icon
 						class="x-large"
 						pack="fab"
@@ -107,6 +111,7 @@ h3 {
   font-size: 2.5em;
   line-height: 80px;
   float: left;
+  cursor: default;
 }
 .subalogue-logo {
   float: left;
@@ -114,6 +119,10 @@ h3 {
 .sign-in-link {
 	color: #343534;
 	margin-right: 10rem;
+  transition: color 0.3s;
+}
+.sign-in-link:hover {
+  color: #5ED97D;
 }
 .blue-bg {
 	position: fixed;
@@ -136,5 +145,12 @@ h3 {
 }
 .x-large {
 	font-size: 3.25em;
+}
+.is-primary {
+  background-color: #5ED97D;
+  transition: background-color 0.3s;
+}
+.is-primary:hover {
+  background-color: #2ecd3e;
 }
 </style>
