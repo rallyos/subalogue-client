@@ -3,6 +3,10 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import Landing from './Landing.vue'
 import App from './App.vue'
+/* in `main.js` or wherever you specify your global components */
+import { GridGlobal  } from 'gridjs-vue'
+
+Vue.use(GridGlobal)
 
 Vue.config.productionTip = false
 Vue.use(Buefy, {

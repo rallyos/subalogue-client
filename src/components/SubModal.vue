@@ -1,8 +1,8 @@
 <template>
   <form action="">
-      <div class="modal-card" style="width: 400px">
+      <div class="modal-card has-text-left" style="width: 400px">
           <header class="modal-card-head">
-              <p class="modal-card-title">Add subscription</p>
+              <p class="modal-card-title">{{action == 'create' ? 'Create' : 'Update'}} subscription</p>
               <button
                   type="button"
                   class="delete"
@@ -11,7 +11,7 @@
           <section class="modal-card-body">
               <b-field label="Name">
                   <b-input
-                      v-model="name"
+                      v-model="sub.name"
                       placeholder="Name"
                       required>
                   </b-input>
@@ -20,7 +20,7 @@
               <b-field label="Url">
                   <b-input
                       type="url"
-                      v-model="url"
+                      v-model="sub.url"
                       placeholder="Url">
                   </b-input>
               </b-field>
@@ -28,14 +28,16 @@
               <b-field label="Price">
                   <b-input
                       type="number"
-                      v-model="price"
+                      step="0.01"
+                      min="0"
+                      v-model="sub.price"
                       placeholder="Price">
                   </b-input>
               </b-field>
           </section>
           <footer class="modal-card-foot">
-              <b-button @click="$emit('close')">Close</b-button>
-              <b-button @click="createSubscription">Create</b-button>
+              <b-button type="is-danger" outlined @click="$emit('close')">Close</b-button>
+              <b-button type="is-success" outlined @click="sendRequest">{{action == 'create' ? 'Create' : 'Update'}}</b-button>
           </footer>
       </div>
   </form>
@@ -46,21 +48,27 @@
     import currency from 'currency.js'
 
     export default {
-      data: () => ({
-        name: "",
-        price: 0,
-        url: "",
-      }),
-      props: ['createdSub', 'canCancel'],
+      name: "SubModal",
+      data: () => ({ }),
+      props: ['sub', 'action', 'canCancel'],
       methods: {
-        createSubscription: function() {
+        sendRequest: function() {
           this.price = currency(this.price).intValue
+
+          if (this.action == "create") {
+            var method = "POST";
+            var idPart = "";
+          } else {
+            var method = "UPDATE";
+            var idPart = "/" + this.sub.id;
+          }
+
 					axios({
-						method: "POST",
-						url: "http://localhost:8000/api/v1/me/subscriptions",
-						data: {name: this.name, url: this.url, price: this.price},
+						method: method,
+						url: "http://localhost:8000/api/v1/me/subscriptions" + idPart,
+						data: {name: this.sub.name, url: this.sub.url, price: this.sub.price},
 						withCredentials: true,
-					}).then(response => ( this.$emit('add', response.data) ));
+            }).then(response => ( this.$emit(this.action, response.data) ));
           this.$parent.close();
         }
       }

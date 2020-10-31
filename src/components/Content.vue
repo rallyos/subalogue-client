@@ -1,5 +1,5 @@
 <template>
-  <section class="pl-6 pr-4 mb-2 h-100">
+  <section class="pl-4 pr-4 mb-2 h-100">
     <section class="content-top">
         <b-modal
             v-model="isComponentModalActive"
@@ -9,7 +9,7 @@
             aria-role="dialog"
             aria-modal>
             <template #default="props">
-								<CreateSub v-bind="createdSub" @close="props.close" @add="addToTable"/>
+								<SubModal :sub="sub" action="create" @close="props.close" @create="addToTable" update="updateInTable"/>
             </template>
         </b-modal>
 			<b-field>
@@ -42,18 +42,34 @@
 
 <script>
 const axios = require('axios')
-import Footer from './Footer.vue'
-import CreateSub from './CreateSub.vue'
 import currency from 'currency.js'
-import { _, html } from 'gridjs'
-import Grid from 'gridjs-vue'
+
+import Footer from './Footer.vue'
+import SubModal from './SubModal.vue'
+import SubControls from './SubControls.vue'
+// import { _, html } from 'gridjs'
+// import { Grid from 'gridjs-vue'
 
 export default {
   name: 'Content',
+	mounted() {
+		this.$on('delete', function() {'chep'});
+	},
   methods: {
-    addToTable: function(newSub) {
-      newSub.price = currency(newSub.price, { fromCents: true }).value;
-      this.rows.push(newSub)
+    addToTable: function(sub) {
+      sub.price = currency(sub.price, { fromCents: true }).value;
+      this.rows.push(sub)
+    },
+    updateInTable: function(sub) {
+      var index = this.findSubIndexById(sub.id)
+      this.subscriptions[index] = sub
+      this.subscriptionsToRows()
+    },
+    deleteFromTable: function(id) {
+      debugger
+      var index = this.findSubIndexById(id)
+      this.subscriptions.splice(index, 1)
+      this.subscriptionsToRows()
     },
     getSubscriptions: function() {
 			axios
@@ -63,38 +79,58 @@ export default {
             sub.price = currency(sub.price, { fromCents: true }).value;
           }),
           this.subscriptions = response.data.subscriptions,
-          this.rows = this.subscriptionsToRows(this.subscriptions)
+          this.subscriptionsToRows()
         ))
     },
-    subscriptionsToRows: function(subscriptions) {
+    subscriptionsToRows: function() {
       var rows = [];
-      subscriptions.forEach(function(sub) {
+      this.subscriptions.forEach(function(sub) {
         rows.push({name: sub.name, url: sub.url, price: sub.price})
       });
-      return rows
-   }
+      this.rows = rows
+    },
+    findSubIndexById: function(id) {
+      return this.subscriptions.findIndex(sub => (sub.id == id))
+    },
+    findSubByName: function(name) {
+      return this.subscriptions.find(sub => (sub.name == name))
+    }
   },
 	components: {
-		Grid,
 		Footer,
-    CreateSub
+    SubModal
 	},
 	data() {
     this.getSubscriptions()
 		return {
       isComponentModalActive: false,
       cols: [
-        { name: "Name", formatter: (cell, row) => html(`<img width="16" height="16" class="favico" src="${row.cells[1].data}/favicon.ico"> <span>${cell}</span>`) },
-        { name: "Url", formatter: (cell) => html(`<a href="${cell}" target="_blank" rel="noopener noreferrer">${cell}</a>`) },
-        { name: "price",
+        { name: "Name", formatter: (cell, row) => this.$gridjs.html(`<img width="16" height="16" class="favico" src="${row.cells[1].data}/favicon.ico"> <span>${cell}</span>`) },
+        { name: "Url", formatter: (cell) => this.$gridjs.html(`<a href="${cell}" target="_blank" rel="noopener noreferrer">${cell}</a>`) },
+        { name: "Price",
           attributes: {
             "data-field": "price"
           }
+        },
+        { name: "Control",
+					formatter: (cell, row) => {
+						const current = this.$gridjs.uuid()
+						this.$gridjs.render(
+							`[data-ref="${current}"]`,
+							SubControls, {
+                "sub": this.findSubByName(row.cells[0].data)
+              }, {
+                "on": {
+                  "delete": this.deleteFromTable}
+              }
+						)
+						return this.$gridjs.html(`<div data-ref="${current}"></div>`)
+					}
         }
       ],
       subscriptions: [],
       rows: [],
-      createdSub: {}
+      sub: {}
 		}
 	}
 }
