@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
   .sidebar {
-		background-color: #F5F5F5;
+    background-color: #F5F5F5;
     height: 100%;
   }
 </style>

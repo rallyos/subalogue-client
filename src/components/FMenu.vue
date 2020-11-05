@@ -1,10 +1,10 @@
 <template>
-  <section class="ml-4">
-    <a href="#" class="menu-item">
+  <section class="menu-container ml-4 pb-3">
+    <a href="#" class="menu-item" :class="{ active: $root.currentRoute == '/app' }">
       <section class="my-4 has-text-centered">
-        <b-icon class="menu-item-icon my-1" pack="fal" icon="clipboard-list"></b-icon>
-        <span class="menu-item-label">Overview</span>
-        </section>
+        <b-icon class="menu-item-icon my-1" pack="fal" icon="table"></b-icon>
+        <span class="menu-item-label" >Overview</span>
+      </section>
     </a>
     <a href="#" class="menu-item">
       <section class="my-4 has-text-centered">
@@ -26,13 +26,17 @@
 </script>
 
 <style scoped>
+.menu-container {
+  border-bottom: solid 2px #dcdcdc;
+}
 .menu-item {
   color: #818386;
 }
 .menu-item-label {
 }
 .menu-item {
-  font-size: 1.15em;
+  font-size: 1em;
+  font-weight: 500;
 }
 .menu-item-icon {
   display: block;
@@ -42,6 +46,9 @@
   font-size: 1.3em;
 }
 .menu-item:hover {
+  color: #FF575A;
+}
+.active {
   color: #FF575A;
 }
 </style>

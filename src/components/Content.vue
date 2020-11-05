@@ -9,34 +9,34 @@
             aria-role="dialog"
             aria-modal>
             <template #default="props">
-								<SubModal :sub="sub" action="create" @close="props.close" @create="addToTable" update="updateInTable"/>
+                <SubModal :sub="sub" action="create" @close="props.close" @create="addToTable" update="updateInTable"/>
             </template>
         </b-modal>
-			<b-field>
-				<b-input class="gray-input mt-2 mb-4"
-					placeholder="Search"
-					type="search"
-					icon-pack="fal"
-					icon="search">
-				</b-input>
-			</b-field>
+      <b-field>
+        <b-input class="gray-input mt-2 mb-4"
+          placeholder="Search"
+          type="search"
+          icon-pack="fal"
+          icon="search">
+        </b-input>
+      </b-field>
     </section>
     <section class="hero grid-container pt-5 px-5 h-100 is-scrollable">
       <div class="hero-head">
         <h2 class="subscription-heading">Subscriptions</h2>
         <b-button @click="isComponentModalActive = true"
-							class="mt-1 ml-3"
-							size="is-small"
-							icon-pack="fal"
-							icon-right="plus"/>
+              class="mt-1 ml-3"
+              size="is-small"
+              icon-pack="fal"
+              icon-right="plus"/>
       </div>
-			<div class="hero-body">
-        <grid :cols="cols" :rows="rows"></grid>
+      <div class="hero-body pt-3">
+        <grid :cols="cols" :rows="rows" :styles="tableStyle"></grid>
       </div>
       <div class="hero-foot">
         <Footer/>
       </div>
-		</section>
+    </section>
   </section>
 </template>
 
@@ -51,10 +51,10 @@ import SubControls from './SubControls.vue'
 // import { Grid from 'gridjs-vue'
 
 export default {
-  name: 'Content',
-	mounted() {
-		this.$on('delete', function() {'chep'});
-	},
+  name: '',
+  mounted() {
+    this.$on('delete', function() {'chep'});
+  },
   methods: {
     addToTable: function(sub) {
       sub.price = currency(sub.price, { fromCents: true }).value;
@@ -72,7 +72,7 @@ export default {
       this.subscriptionsToRows()
     },
     getSubscriptions: function() {
-			axios
+      axios
         .get('http://localhost:8000/api/v1/me/subscriptions', {withCredentials: true})
         .then(response => (
           response.data.subscriptions.forEach(function(sub) {
@@ -96,13 +96,13 @@ export default {
       return this.subscriptions.find(sub => (sub.name == name))
     }
   },
-	components: {
-		Footer,
+  components: {
+    Footer,
     SubModal
-	},
-	data() {
+  },
+  data() {
     this.getSubscriptions()
-		return {
+    return {
       isComponentModalActive: false,
       cols: [
         { name: "Name", formatter: (cell, row) => this.$gridjs.html(`<img width="16" height="16" class="favico" src="${row.cells[1].data}/favicon.ico"> <span>${cell}</span>`) },
@@ -112,27 +112,38 @@ export default {
             "data-field": "price"
           }
         },
-        { name: "Control",
-					formatter: (cell, row) => {
-						const current = this.$gridjs.uuid()
-						this.$gridjs.render(
-							`[data-ref="${current}"]`,
-							SubControls, {
+        { name: "",
+          formatter: (cell, row) => {
+            const current = this.$gridjs.uuid()
+            this.$gridjs.render(
+              `[data-ref="${current}"]`,
+              SubControls, {
                 "sub": this.findSubByName(row.cells[0].data)
               }, {
                 "on": {
                   "delete": this.deleteFromTable}
               }
-						)
-						return this.$gridjs.html(`<div data-ref="${current}"></div>`)
-					}
+            )
+            return this.$gridjs.html(`<div data-ref="${current}"></div>`)
+          }
         }
       ],
+      tableStyle: {
+        td: {
+          'border': 'none'
+        },
+        th: {
+          'background': 'none',
+          'border': 'none',
+          'border-bottom': 'solid 1px #dcdcdc'
+
+        }
+      },
       subscriptions: [],
       rows: [],
       sub: {}
-		}
-	}
+    }
+  }
 }
 </script>
 
@@ -159,6 +170,9 @@ export default {
 .gray-input > input{
     background-color: #EDEDED;
     border-color: #EDEDED;
+}
+.gridjs-wrapper {
+  box-shadow: none !important;
 }
 .gridjs-td[data-column-id="name"], .gridjs-td[data-column-id="price"] {
   font-weight: 600;

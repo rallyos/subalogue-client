@@ -3,8 +3,8 @@ import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
 import Landing from './Landing.vue'
 import App from './App.vue'
-/* in `main.js` or wherever you specify your global components */
 import { GridGlobal  } from 'gridjs-vue'
+import {version} from '../package.json';
 
 Vue.use(GridGlobal)
 
@@ -14,14 +14,15 @@ Vue.use(Buefy, {
 });
 
 const routes = {
-	'/': Landing,
+  '/': Landing,
   '/app': App,
 }
 
 const app = new Vue({
   el: '#app',
   data: {
-    currentRoute: window.location.pathname
+    currentRoute: window.location.pathname,
+    version: version
   },
   computed: {
     ViewComponent () {
