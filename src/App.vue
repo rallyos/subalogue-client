@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-		<section class="columns is-gapless h-100">
-			<div class="column is-1 is-narrow">
-				<Sidebar/>
-			</div>
-			<div class="column is-11 is-narrow">
-				<Content/>
-			</div>
-		</section>
+    <section class="columns is-gapless h-100">
+      <div class="column is-2 is-narrow">
+        <Sidebar/>
+      </div>
+      <div class="column is-10 is-narrow">
+        <Content/>
+      </div>
+    </section>
   </div>
 </template>
 

@@ -49,6 +49,7 @@ export default {
 <style scoped>
 .light-hover-only {
   background-color: transparent !important;
+  box-shadow: none !important;
 }
 .light-hover-only.is-danger:hover {
   background-color: #fde0e6 !important;

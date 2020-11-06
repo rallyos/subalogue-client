@@ -1,5 +1,5 @@
 <template>
-  <section class="pl-4 pr-4 mb-2 h-100">
+  <section class="mb-2 h-100">
     <section class="content-top">
         <b-modal
             v-model="isComponentModalActive"
@@ -12,25 +12,37 @@
                 <SubModal :sub="sub" action="create" @close="props.close" @create="addToTable" update="updateInTable"/>
             </template>
         </b-modal>
-      <b-field>
-        <b-input class="gray-input mt-2 mb-4"
-          placeholder="Search"
-          type="search"
-          icon-pack="fal"
-          icon="search">
-        </b-input>
-      </b-field>
     </section>
-    <section class="hero grid-container pt-5 px-5 h-100 is-scrollable">
+    <section class="hero grid-container pt-2 px-5 h-100 is-scrollable">
+        <div class="level">
+          <div class="level-left">
+            <div class="level-item">
+              <b-icon
+                  pack="far"
+                  icon="stream"
+                  size="is-medium"/>
+              <span class="pr-2 is-size-5">Subscriptions</span>
+              <!-- <b&#45;button @click="isComponentModalActive = true" -->
+              <!--       class="ml&#45;3" -->
+              <!--       size="is&#45;small" -->
+              <!--       icon&#45;pack="fal" -->
+              <!--       icon&#45;right="plus"/> -->
+            </div>
+          </div>
+          <div class="level-right">
+            <b-field>
+              <b-input class="gray-input mt-1 mb-2"
+                placeholder="Search"
+                type="search"
+                icon-pack="fal"
+                icon="search">
+              </b-input>
+            </b-field>
+          </div>
+        </div>
       <div class="hero-head">
-        <h2 class="subscription-heading">Subscriptions</h2>
-        <b-button @click="isComponentModalActive = true"
-              class="mt-1 ml-3"
-              size="is-small"
-              icon-pack="fal"
-              icon-right="plus"/>
       </div>
-      <div class="hero-body pt-3">
+      <div class="hero-body pt-0 px-0">
         <grid :cols="cols" :rows="rows" :styles="tableStyle"></grid>
       </div>
       <div class="hero-foot">
@@ -151,7 +163,6 @@ export default {
 .content {
 }
 .subscription-heading {
-  float: left;
 }
 .content-top {
   background-color: #F5F5F5;
@@ -159,7 +170,6 @@ export default {
 .grid-container {
   font-size: 0.95rem;
   background-color: #FFF;
-  border-radius: 10px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 .is-scrollable {
@@ -176,6 +186,9 @@ export default {
 }
 .gridjs-td[data-column-id="name"], .gridjs-td[data-column-id="price"] {
   font-weight: 600;
+}
+.gridjs-td[data-column-id=""], .gridjs-td[data-column-id=""] {
+  padding-top: 0.2em;
 }
 .favico {
   float: left;

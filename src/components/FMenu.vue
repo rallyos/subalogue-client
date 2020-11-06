@@ -1,14 +1,14 @@
 <template>
-  <section class="menu-container ml-4 pb-3">
+  <section class="menu-container pb-3">
     <a href="#" class="menu-item" :class="{ active: $root.currentRoute == '/app' }">
-      <section class="my-4 has-text-centered">
-        <b-icon class="menu-item-icon my-1" pack="fal" icon="table"></b-icon>
+      <section>
+        <b-icon class="menu-item-icon mx-2 my-1" pack="fal" icon="list-alt" size="is-medium"></b-icon>
         <span class="menu-item-label" >Overview</span>
       </section>
     </a>
     <a href="#" class="menu-item">
-      <section class="my-4 has-text-centered">
-        <b-icon class="menu-item-icon my-1" pack="fal" icon="chart-pie-alt"></b-icon>
+      <section>
+        <b-icon class="menu-item-icon mx-2 my-1" pack="fal" icon="chart-pie-alt" size="is-medium"></b-icon>
         <span class="menu-item-label">Charts</span>
       </section>
     </a>
@@ -30,7 +30,7 @@
   border-bottom: solid 2px #dcdcdc;
 }
 .menu-item {
-  color: #818386;
+  color: #898B8D;
 }
 .menu-item-label {
 }
@@ -39,11 +39,9 @@
   font-weight: 500;
 }
 .menu-item-icon {
-  display: block;
-  margin: 0 auto;
-  width: 1.3em;
-  height: 1.3em;
-  font-size: 1.3em;
+  /* width: 1.3em; */
+  /* height: 1.3em; */
+  /* font-size: 1.3em; */
 }
 .menu-item:hover {
   color: #FF575A;
