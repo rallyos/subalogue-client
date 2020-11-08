@@ -1,5 +1,5 @@
 <template>
-  <section class="mb-2 h-100">
+  <section class="h-100">
     <section class="content-top">
         <b-modal
             v-model="isComponentModalActive"
@@ -30,14 +30,14 @@
             </div>
           </div>
           <div class="level-right">
-            <b-field>
-              <b-input class="gray-input mt-1 mb-2"
-                placeholder="Search"
-                type="search"
-                icon-pack="fal"
-                icon="search">
-              </b-input>
-            </b-field>
+            <!-- <b&#45;field> -->
+            <!--   <b&#45;input class="gray&#45;input mt&#45;1 mb&#45;2" -->
+            <!--     placeholder="Search" -->
+            <!--     type="search" -->
+            <!--     icon&#45;pack="fal" -->
+            <!--     icon="search"> -->
+            <!--   </b&#45;input> -->
+            <!-- </b&#45;field> -->
           </div>
         </div>
       <div class="hero-head">
