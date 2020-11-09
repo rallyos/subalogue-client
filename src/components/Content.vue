@@ -48,17 +48,14 @@
 </template>
 
 <script>
-const axios = require('axios')
+import axios from 'axios';
 import currency from 'currency.js'
-
 import Footer from './Footer.vue'
 import SubModal from './SubModal.vue'
 import SubControls from './SubControls.vue'
-// import { _, html } from 'gridjs'
-// import { Grid from 'gridjs-vue'
 
 export default {
-  name: '',
+  name: 'Content',
   computed: {
     subscriptions () {
       return this.$store.state.subscriptions
@@ -105,8 +102,6 @@ export default {
             "data-field": "price"
           }
         },
-        // TODO: Must be optimised, so that we don't init modal for every sub
-        // without the need for it
         { name: "",
           formatter: (cell, row) => {
             const current = this.$gridjs.uuid()

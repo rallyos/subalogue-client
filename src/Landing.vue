@@ -29,7 +29,7 @@
                 href="http://localhost:8000/auth/login"
                 type="is-primary"
                 size="is-large"
-                icon-pack="fad"
+                icon-pack="far"
                 icon-right="portal-enter">
                 Try it
             </b-button>

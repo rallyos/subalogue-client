@@ -1,15 +1,15 @@
+import currency from 'currency.js'
+import axios from 'axios'
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Buefy from 'buefy'
 import 'buefy/dist/buefy.css'
+import { GridGlobal  } from 'gridjs-vue'
+
 import Landing from './Landing.vue'
 import App from './App.vue'
-import { GridGlobal  } from 'gridjs-vue'
 import {version} from '../package.json';
-import currency from 'currency.js'
-
-// import?
-const axios = require('axios');
 
 Vue.use(Vuex)
 Vue.use(GridGlobal)
@@ -46,7 +46,6 @@ const store = new Vuex.Store({
   },
   mutations: {
     addOne (state, sub) {
-      sub.price = currency(sub.price, { fromCents: true }).value;
       state.subscriptions.push(sub)
     },
     addMany (state, subscriptions) {
