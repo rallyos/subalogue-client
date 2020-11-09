@@ -37,40 +37,44 @@
           </section>
           <footer class="modal-card-foot">
               <b-button type="is-danger" outlined @click="$emit('close')">Close</b-button>
-              <b-button type="is-success" outlined @click="sendRequest">{{action == 'create' ? 'Create' : 'Update'}}</b-button>
+              <b-button type="is-success" outlined @click="triggerAction">{{action == 'create' ? 'Create' : 'Update'}}</b-button>
           </footer>
       </div>
   </form>
 </template>
 
 <script>
-		const axios = require('axios');
-    import currency from 'currency.js'
+import currency from 'currency.js'
 
-    export default {
-      name: "SubModal",
-      data: () => ({ }),
-      props: ['sub', 'action', 'canCancel'],
-      methods: {
-        sendRequest: function() {
-          this.price = currency(this.price).intValue
+export default {
+  name: "SubModal",
+  data: () => ({ }),
+  props: ['sub'],
+  computed: {
+    action ()  {
+      return this.sub.id ? 'update' : 'create'
+    }
+  },
+  methods: {
+    triggerAction: function() {
+      this.$parent.close();
+      this.sub.price = currency(this.sub.price).intValue
 
-          if (this.action == "create") {
-            var method = "POST";
-            var idPart = "";
-          } else {
-            var method = "UPDATE";
-            var idPart = "/" + this.sub.id;
-          }
-
-					axios({
-						method: method,
-						url: "http://localhost:8000/api/v1/me/subscriptions" + idPart,
-						data: {name: this.sub.name, url: this.sub.url, price: this.sub.price},
-						withCredentials: true,
-            }).then(response => ( this.$emit(this.action, response.data) ));
-          this.$parent.close();
-        }
+      if (this.action == "create") {
+        this.$store.dispatch('createSubscription', {
+          name: this.sub.name,
+          url: this.sub.url,
+          price: this.sub.price
+        })
+      } else {
+        this.$store.dispatch('updateSubscription', {
+          id: this.sub.id,
+          name: this.sub.name,
+          url: this.sub.url,
+          price: this.sub.price
+        })
       }
     }
+  }
+}
 </script>

@@ -1,11 +1,24 @@
 <template>
   <section class="sidebar">
+    <b-modal
+        v-model="isComponentModalActive"
+        has-modal-card
+        trap-focus
+        :destroy-on-hide="true"
+        aria-role="dialog"
+        aria-modal>
+        <template #default="props">
+            <SubModal :sub="sub" action="create" @close="props.close"/>
+        </template>
+    </b-modal>
     <img alt="Subalogue logo" id="logo" src="../assets/logo.png" width="40" height="40">
     <b-button id="add-button"
               class="mb-4"
               icon-size="is-medium"
               icon-pack="fal"
-              icon-left="layer-plus">
+              icon-left="layer-plus"
+              @click="isComponentModalActive = true"
+              >
     Add Subscription
     </b-button>
     <FMenu/>
@@ -15,12 +28,18 @@
 <script>
 
 import FMenu from './FMenu.vue'
+import SubModal from './SubModal.vue'
 
 export default {
   name: 'sidebar',
+  data: () => ({
+    isComponentModalActive: false,
+    sub: {}
+  }),
   props: {},
   components: {
-    FMenu
+    FMenu,
+    SubModal
   }
 }
 </script>

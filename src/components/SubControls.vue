@@ -1,48 +1,15 @@
 <template>
   <div class="has-text-centered">
-    <b-modal
-        v-model="isComponentModalActive"
-        has-modal-card
-        trap-focus
-        :destroy-on-hide="true"
-        aria-role="dialog"
-        aria-modal>
-        <template #default="props">
-            <SubModal :sub="sub" action="update" @close="props.close" />
-        </template>
-    </b-modal>
-    <b-button type="is-info is-light" class="light-hover-only" icon-pack="fal" icon-right="edit" @click="isComponentModalActive = true"/>
-    <b-button type="is-danger is-light" class="light-hover-only" icon-pack="fal" icon-right="trash-alt" @click="deleteSubscription"/>
+    <b-button type="is-info is-light" class="light-hover-only" icon-pack="fal" icon-right="edit" @click="$emit('edit')"/>
+    <b-button type="is-danger is-light" class="light-hover-only" icon-pack="fal" icon-right="trash-alt" @click="$emit('delete')"/>
   </div>
 </template>
 
 <script>
-import SubModal from './SubModal.vue'
-
 export default {
   name: 'SubControls',
-  data: () => ({
-    isComponentModalActive: false,
-  }),
-  props: ['sub'],
-  components: {
-    SubModal
-  },
-  methods: {
-    showUpdateModal: function() {
-    },
-    deleteSubscription: function() {
-      var confirmed = window.confirm("Delete subscription?");
-      if (confirmed) {
-        var url = 'http://localhost:8000/api/v1/me/subscriptions' + '/' + sub.id
-        var confirmed = window.confirm("Delete subscription?");
-        if (confirmed) {
-          axios.delete(url, {withCredentials: true})
-               .then(response => (this.$emit('delete', sub.id)))
-        }
-      }
-    }
-  }
+  data: () => ({ }),
+  components: { }
 }
 </script>
 

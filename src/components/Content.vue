@@ -9,7 +9,7 @@
             aria-role="dialog"
             aria-modal>
             <template #default="props">
-                <SubModal :sub="sub" action="create" @close="props.close" @create="addToTable" update="updateInTable"/>
+                <SubModal :sub="sub" @close="props.close"/>
             </template>
         </b-modal>
     </section>
@@ -22,11 +22,6 @@
                   icon="stream"
                   size="is-medium"/>
               <span class="pr-2 is-size-5">Subscriptions</span>
-              <!-- <b&#45;button @click="isComponentModalActive = true" -->
-              <!--       class="ml&#45;3" -->
-              <!--       size="is&#45;small" -->
-              <!--       icon&#45;pack="fal" -->
-              <!--       icon&#45;right="plus"/> -->
             </div>
           </div>
           <div class="level-right">
@@ -42,7 +37,7 @@
         </div>
       <div class="hero-head">
       </div>
-      <div class="hero-body pt-0 px-0">
+      <div class="hero-body pt-0 px-0" v-if="subscriptions.length">
         <grid :cols="cols" :rows="rows" :styles="tableStyle"></grid>
       </div>
       <div class="hero-foot">
@@ -64,49 +59,35 @@ import SubControls from './SubControls.vue'
 
 export default {
   name: '',
-  mounted() {
-    this.$on('delete', function() {'chep'});
+  computed: {
+    subscriptions () {
+      return this.$store.state.subscriptions
+    },
+    rows () {
+      return this.$store.getters.subscriptionsToRows
+    }
   },
   methods: {
-    addToTable: function(sub) {
-      sub.price = currency(sub.price, { fromCents: true }).value;
-      this.rows.push(sub)
+    deleteHandler: function(subName) {
+      return () => {
+        var sub = this.$store.getters.findSubByName(subName)
+        var confirmed = window.confirm("Delete subscription?");
+        if (confirmed) {
+          this.$store.dispatch('deleteSubscription', sub.id)
+        }
+      }
     },
-    updateInTable: function(sub) {
-      var index = this.findSubIndexById(sub.id)
-      this.subscriptions[index] = sub
-      this.subscriptionsToRows()
-    },
-    deleteFromTable: function(id) {
-      debugger
-      var index = this.findSubIndexById(id)
-      this.subscriptions.splice(index, 1)
-      this.subscriptionsToRows()
+    editHandler: function(subName) {
+      return () => {
+        var sub = this.$store.getters.findSubByName(subName)
+
+        this.sub = Object.assign({}, sub)
+        this.isComponentModalActive = true;
+      }
     },
     getSubscriptions: function() {
-      axios
-        .get('http://localhost:8000/api/v1/me/subscriptions', {withCredentials: true})
-        .then(response => (
-          response.data.subscriptions.forEach(function(sub) {
-            sub.price = currency(sub.price, { fromCents: true }).value;
-          }),
-          this.subscriptions = response.data.subscriptions,
-          this.subscriptionsToRows()
-        ))
+      this.$store.dispatch('getSubscriptions')
     },
-    subscriptionsToRows: function() {
-      var rows = [];
-      this.subscriptions.forEach(function(sub) {
-        rows.push({name: sub.name, url: sub.url, price: sub.price})
-      });
-      this.rows = rows
-    },
-    findSubIndexById: function(id) {
-      return this.subscriptions.findIndex(sub => (sub.id == id))
-    },
-    findSubByName: function(name) {
-      return this.subscriptions.find(sub => (sub.name == name))
-    }
   },
   components: {
     Footer,
@@ -124,16 +105,18 @@ export default {
             "data-field": "price"
           }
         },
+        // TODO: Must be optimised, so that we don't init modal for every sub
+        // without the need for it
         { name: "",
           formatter: (cell, row) => {
             const current = this.$gridjs.uuid()
             this.$gridjs.render(
               `[data-ref="${current}"]`,
-              SubControls, {
-                "sub": this.findSubByName(row.cells[0].data)
-              }, {
+              SubControls, { }, {
                 "on": {
-                  "delete": this.deleteFromTable}
+                  "edit": this.editHandler(row.cells[0].data),
+                  "delete": this.deleteHandler(row.cells[0].data)
+                }
               }
             )
             return this.$gridjs.html(`<div data-ref="${current}"></div>`)
@@ -151,8 +134,6 @@ export default {
 
         }
       },
-      subscriptions: [],
-      rows: [],
       sub: {}
     }
   }
