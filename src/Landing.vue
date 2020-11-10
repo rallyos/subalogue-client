@@ -3,7 +3,7 @@
     <nav class="level">
       <div class="level-left">
         <div class="level-item">
-          <img alt="Subalogue logo" class="ml-5 mt-5 subalogue-logo" src="./assets/logo.png" width="80" height="80">
+          <img alt="Subalogue logo" class="ml-6 mt-5 subalogue-logo" src="./assets/logo.png" width="80" height="80">
           <h1 class="subalogue-heading ml-4 mt-5">Subalogue</h1>
         </div>
       </div>
@@ -15,11 +15,11 @@
     </nav>
     <div class="columns larger-p">
       <div class="column">
-        <div class="hero mt-4 px-5">
+        <div class="hero mt-4 pl-6">
           <div class="hero-head">
             <h2 class="is-size-5">Subscription manager that tries to save your <b-icon class="pl-3" size="is-medium" pack="fal" icon="envelope-open-dollar"></b-icon></h2>
           </div>
-          <div class="hero-body pt-1 pb-5 px-0">
+          <div class="hero-body pt-1 pb-6 px-0">
             <p class="main-text is-size-6-tablet">
               When everything is subscription, it’s often easy forget that you  are paying for services you don’t use. Having a subscription manager by your side can prompt you to “follow the money” more often, and make decisions before the next pay date.</br></br>
               Subalogue will try to help you with this process, and more.
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="columns is-centered gradient-bg pt-5 pb-2">
-        <div class="column is-3 is-4-tablet has-text-centered feature">
+        <div class="column is-3-desktop is-4-tablet has-text-centered feature">
           <a href="https://github.com/shifting-photons/subalogue" target="_blank" rel="noopener noreferrer" id="gh">
             <b-icon
                 class="x-large"
@@ -53,7 +53,7 @@
             <p>Forever</p>
           </a>
         </div>
-      <div class="column is-3 is-4-tablet has-text-centered has-white-text feature">
+      <div class="column is-3-desktop is-4-tablet has-text-centered has-white-text feature">
         <b-icon
             class="x-large"
             pack="fal"
@@ -63,7 +63,7 @@
         <p>No overblown features.</br>
         Only the right toolset to help you take the right decisions about your subscriptions.</p>
       </div>
-      <div class="column is-3 is-4-tablet has-text-centered has-white-text feature">
+      <div class="column is-3-desktop is-4-tablet has-text-centered has-white-text feature">
         <b-icon
             class="x-large mb-2"
             pack="fal"
@@ -141,7 +141,7 @@ h3 {
   color: #fff;
 }
 .larger-p {
-  padding-bottom: 5.5em;
+  padding-bottom: 4em;
 }
 .x-large {
   font-size: 3.25em;
@@ -165,7 +165,7 @@ h3 {
 .footer-text {
   font-size: 0.8em;
 }
-@media screen and (max-width: 1140px) {
+@media screen and (max-width: 1160px) {
   .gradient-bg {
     background: linear-gradient(-50deg, #49c1ff 68%, white 32%);
   }
