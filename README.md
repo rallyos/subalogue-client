@@ -1,4 +1,16 @@
-# subalogue_client
+<p align="center">
+  <img src="public/logo_wide.png" width="400" height="100"/>
+</p>
+
+---  
+
+<p align="center">
+  <strong>Manage your subscriptions with ease.</strong></br>
+  Frontend client for https://subalogue.shifting-photons.dev</br>
+  <img src="https://img.shields.io/badge/version-0.1.0-brightgreen" align="center"/></br>
+</p>
+
+For more information go to the [main project repo](https://github.com/shifting-photons/subalogue/).
 
 ## Project setup
 ```
@@ -9,11 +21,3 @@ npm install
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
