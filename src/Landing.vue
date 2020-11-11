@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="level-right">
-        <a href="http://localhost:8000/auth/login" class="sign-in-link mt-6">
+        <a href="/auth/login" class="sign-in-link mt-6">
           <h2>Sign In <b-icon class="pl-3" pack="far" size="is-medium" icon="user-astronaut"></b-icon></h2>
         </a>
       </div>
@@ -28,7 +28,7 @@
           <div class="hero-foot has-text-centered">
             <b-button
                 tag="a"
-                href="http://localhost:8000/auth/login"
+                href="/auth/login"
                 type="is-primary"
                 size="is-large"
                 icon-pack="fal"

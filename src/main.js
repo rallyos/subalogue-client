@@ -63,7 +63,7 @@ const store = new Vuex.Store({
   actions: {
     getSubscriptions (context) {
       axios
-        .get('http://localhost:8000/api/v1/me/subscriptions', {withCredentials: true})
+        .get('/api/v1/me/subscriptions', {withCredentials: true})
         .then(response => (
           response.data.subscriptions.forEach(function(sub) {
             sub.price = currency(sub.price, { fromCents: true }).value;
@@ -74,7 +74,7 @@ const store = new Vuex.Store({
     createSubscription (context, sub) {
       axios({
         method: "POST",
-        url: "http://localhost:8000/api/v1/me/subscriptions",
+        url: "/api/v1/me/subscriptions",
         data: sub,
         withCredentials: true,
         }).then(response => (
@@ -88,7 +88,7 @@ const store = new Vuex.Store({
 
       axios({
         method: "PUT",
-        url: "http://localhost:8000/api/v1/me/subscriptions/" + id,
+        url: "/api/v1/me/subscriptions/" + id,
         data: sub,
         withCredentials: true,
         }).then(response => (
@@ -97,7 +97,7 @@ const store = new Vuex.Store({
         ));
     },
     deleteSubscription (context, id) {
-      var url = 'http://localhost:8000/api/v1/me/subscriptions/' + id
+      var url = '/api/v1/me/subscriptions/' + id
       axios.delete(url, {withCredentials: true})
          .then(response => (context.commit('remove', id)))
     }
