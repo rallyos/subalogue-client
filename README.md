@@ -5,9 +5,7 @@
 ---  
 
 <p align="center">
-  <strong>Manage your subscriptions with ease.</strong></br>
-  Frontend client for https://subalogue.shiftingphotons.dev</br>
-  <img src="https://img.shields.io/badge/version-0.1.0-brightgreen" align="center"/></br>
+  <strong>✨ Manage your subscriptions with ease ✨</strong></br></br>
 </p>
 
 For more information go to the [main project repo](https://github.com/shiftingphotons/subalogue/).
@@ -16,8 +14,11 @@ For more information go to the [main project repo](https://github.com/shiftingph
 ```
 npm install
 ```
-
+Make sure that the [API](https://github.com/shiftingphotons/subalogue) is running.
 ### Compiles and hot-reloads for development
 ```
 npm run serve
+
+App running at:
+  - Local:   http://localhost:8080/
 ```
