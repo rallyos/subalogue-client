@@ -145,13 +145,13 @@ export default {
   background-color: #F5F5F5;
 }
 .empty-state-bg {
-	width: 100%;
-	height: 100%;
+  width: 100%;
+  height: 100%;
   background-image: url('~@/assets/undraw_starry_window_ppm0.svg');
-	background-repeat: no-repeat;
-	background-position-x: center;
-	background-position-y: center;
-	background-size: 50%;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  background-size: 50%;
 }
 .grid-container {
   font-size: 0.95rem;
