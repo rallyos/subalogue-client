@@ -8,7 +8,7 @@
         </div>
       </div>
       <div class="level-right">
-        <a href="/auth/login" class="sign-in-link mt-6">
+        <a :href="$root.API_BASE_URL + '/auth/login'" class="sign-in-link mt-6">
           <h2>Sign In <b-icon class="pl-3" pack="far" size="is-medium" icon="user-astronaut"></b-icon></h2>
         </a>
       </div>
@@ -28,7 +28,7 @@
           <div class="hero-foot has-text-centered">
             <b-button
                 tag="a"
-                href="/auth/login"
+                :href="$root.API_BASE_URL + '/auth/login'"
                 type="is-primary"
                 size="is-large"
                 icon-pack="fal"
@@ -43,7 +43,7 @@
     </div>
     <div class="columns is-centered gradient-bg pt-5 pb-2">
         <div class="column is-3-desktop is-4-tablet has-text-centered feature">
-          <a href="https://github.com/shifting-photons/subalogue" target="_blank" rel="noopener noreferrer" id="gh">
+          <a href="https://github.com/shiftingphotons/subalogue" target="_blank" rel="noopener noreferrer" id="gh">
             <b-icon
                 class="x-large"
                 pack="fab"
@@ -76,7 +76,7 @@
     </div>
     <footer class="footerlike pt-4">
       <p class="footer-text has-text-centered pb-2">
-        Developed by <a href="https://shifting-photons.dev" class="has-blue-text has-text-weight-bold" target="_blank" rel="noopener noreferrer">shifting-photons.dev</a></br>
+        Developed by <a href="https://shiftingphotons.dev" class="has-blue-text has-text-weight-bold" target="_blank" rel="noopener noreferrer">shiftingphotons.dev</a></br>
         👋 Come say Hi <a href="https://twitter.com/shiftingphotons" class="has-blue-text has-text-weight-medium" target="_blank" rel="noopener noreferrer">@shiftingphotons</a>
       </p>
     </footer>

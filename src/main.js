@@ -11,6 +11,8 @@ import Landing from './Landing.vue'
 import App from './App.vue'
 import {version} from '../package.json';
 
+const API_BASE_URL = process.env.NODE_ENV == 'development' ? "http://localhost:8000" : "https://subalogue.shiftingphotons.dev"
+
 Vue.use(Vuex)
 Vue.use(GridGlobal)
 
@@ -63,7 +65,7 @@ const store = new Vuex.Store({
   actions: {
     getSubscriptions (context) {
       axios
-        .get('/api/v1/me/subscriptions', {withCredentials: true})
+        .get(API_BASE_URL + '/api/v1/me/subscriptions', {withCredentials: true})
         .then(response => (
           response.data.subscriptions.forEach(function(sub) {
             sub.price = currency(sub.price, { fromCents: true }).value;
@@ -74,7 +76,7 @@ const store = new Vuex.Store({
     createSubscription (context, sub) {
       axios({
         method: "POST",
-        url: "/api/v1/me/subscriptions",
+        url: API_BASE_URL + "/api/v1/me/subscriptions",
         data: sub,
         withCredentials: true,
         }).then(response => (
@@ -88,7 +90,7 @@ const store = new Vuex.Store({
 
       axios({
         method: "PUT",
-        url: "/api/v1/me/subscriptions/" + id,
+        url: API_BASE_URL + "/api/v1/me/subscriptions/" + id,
         data: sub,
         withCredentials: true,
         }).then(response => (
@@ -97,7 +99,7 @@ const store = new Vuex.Store({
         ));
     },
     deleteSubscription (context, id) {
-      var url = '/api/v1/me/subscriptions/' + id
+      var url = API_BASE_URL + '/api/v1/me/subscriptions/' + id
       axios.delete(url, {withCredentials: true})
          .then(response => (context.commit('remove', id)))
     }
@@ -109,7 +111,8 @@ const app = new Vue({
   store: store,
   data: {
     currentRoute: window.location.pathname,
-    version: version
+    version: version,
+    API_BASE_URL: API_BASE_URL,
   },
   computed: {
     ViewComponent () {
