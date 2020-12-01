@@ -1,5 +1,5 @@
 <template>
-  <div class="landing">
+  <div id="app" class="landing">
     <nav class="level">
       <div class="level-left">
         <div class="level-item">
@@ -8,16 +8,16 @@
         </div>
       </div>
       <div class="level-right">
-        <a href="http://localhost:8000/auth/login" class="sign-in-link mt-6">
+        <a :href="$root.API_BASE_URL + '/auth/login'" class="sign-in-link mt-6">
           <h2>Sign In <b-icon class="pl-3" pack="far" size="is-medium" icon="user-astronaut"></b-icon></h2>
         </a>
       </div>
     </nav>
-    <div class="columns larger-p">
+    <div class="columns intro larger-p">
       <div class="column">
-        <div class="hero mt-4 pl-6">
+        <div class="hero mt-5 pl-6">
           <div class="hero-head">
-            <h2 class="is-size-5">Subscription manager that tries to save your <b-icon class="pl-3" size="is-medium" pack="fal" icon="envelope-open-dollar"></b-icon></h2>
+            <h2 class="intro-title">Subscription manager that tries to save your <b-icon class="pl-3" size="is-medium" pack="fal" icon="envelope-open-dollar"></b-icon></h2>
           </div>
           <div class="hero-body pt-1 pb-6 px-0">
             <p class="main-text is-size-6-tablet">
@@ -28,7 +28,7 @@
           <div class="hero-foot has-text-centered">
             <b-button
                 tag="a"
-                href="http://localhost:8000/auth/login"
+                :href="$root.API_BASE_URL + '/auth/login'"
                 type="is-primary"
                 size="is-large"
                 icon-pack="fal"
@@ -43,7 +43,7 @@
     </div>
     <div class="columns is-centered gradient-bg pt-5 pb-2">
         <div class="column is-3-desktop is-4-tablet has-text-centered feature">
-          <a href="https://github.com/shifting-photons/subalogue" target="_blank" rel="noopener noreferrer" id="gh">
+          <a href="https://github.com/shiftingphotons/subalogue" target="_blank" rel="noopener noreferrer" id="gh">
             <b-icon
                 class="x-large"
                 pack="fab"
@@ -74,9 +74,9 @@
         You can export your data in any format you want and use it as you wish.</p>
       </div>
     </div>
-    <footer class="footerlike pt-4">
+    <footer class="footerlike pt-0">
       <p class="footer-text has-text-centered pb-2">
-        Developed by <a href="https://shifting-photons.dev" class="has-blue-text has-text-weight-bold" target="_blank" rel="noopener noreferrer">shifting-photons.dev</a></br>
+        Developed by <a href="https://shiftingphotons.dev" class="has-blue-text has-text-weight-bold" target="_blank" rel="noopener noreferrer">shiftingphotons.dev</a></br>
         👋 Come say Hi <a href="https://twitter.com/shiftingphotons" class="has-blue-text has-text-weight-medium" target="_blank" rel="noopener noreferrer">@shiftingphotons</a>
       </p>
     </footer>
@@ -123,6 +123,16 @@ h3 {
   float: left;
   cursor: default;
 }
+.intro {
+  background-image: url('~@/assets/undraw_remotely_2j6y.svg');
+  background-size: 32%;
+  background-repeat: no-repeat;
+  background-position-x: 80%;
+  background-position-y: -10%;
+}
+.intro-title {
+  font-size: 1.25em;
+}
 .subalogue-logo {
   float: left;
 }
@@ -141,7 +151,7 @@ h3 {
   color: #fff;
 }
 .larger-p {
-  padding-bottom: 4em;
+  padding-bottom: 6.5em;
 }
 .x-large {
   font-size: 3.25em;
@@ -165,9 +175,33 @@ h3 {
 .footer-text {
   font-size: 0.8em;
 }
+@media screen and (min-width: 1440px) {
+  body, html {
+    background-color: #fff
+  }
+  .landing {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: 1350px) {
+  .larger-p {
+    padding-bottom: 3em;
+  }
+}
 @media screen and (max-width: 1160px) {
   .gradient-bg {
     background: linear-gradient(-50deg, #49c1ff 68%, white 32%);
+  }
+  .larger-p {
+    padding-bottom: 4em;
+  }
+  .intro {
+    background-size: 40%;
+    background-position-x: 90%;
+  }
+  .intro-title {
+    font-size: 1em;
   }
 }
 
@@ -186,6 +220,18 @@ h3 {
   }
   .gradient-bg {
     background: #49c1ff;
+  }
+  .intro-title {
+    font-size: 1em;
+  }
+  .intro {
+    background-image: none;
+  }
+  .pl-6 {
+    padding-left: 1em !important;
+  }
+  .hero {
+    padding-right: 1em;
   }
   #gh {
     color: white;

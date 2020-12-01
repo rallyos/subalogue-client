@@ -37,6 +37,7 @@
         </div>
       <div class="hero-head">
       </div>
+      <div v-if="!subscriptions.length" class="empty-state-bg"></div>
       <div class="hero-body pt-0 px-0" v-if="subscriptions.length">
         <grid :cols="cols" :rows="rows" :styles="tableStyle"></grid>
       </div>
@@ -142,6 +143,15 @@ export default {
 }
 .content-top {
   background-color: #F5F5F5;
+}
+.empty-state-bg {
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/assets/undraw_starry_window_ppm0.svg');
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
+  background-size: 50%;
 }
 .grid-container {
   font-size: 0.95rem;
