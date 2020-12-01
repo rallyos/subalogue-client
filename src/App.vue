@@ -27,7 +27,6 @@ export default {
 <style>
 html, body {
   height: 100%;
-  background-color: #F5F5F5;
   overflow: scroll;
 }
 #app {

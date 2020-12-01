@@ -11,7 +11,7 @@
             <SubModal :sub="sub" action="create" @close="props.close"/>
         </template>
     </b-modal>
-    <img alt="Subalogue logo" class="pt-4 pb-5" id="logo" src="../assets/logo.png" width="40" height="40">
+    <img alt="Subalogue logo" class="pt-4 pb-5" id="logo" src="@/assets/logo.png" width="40" height="40">
     <b-button id="add-button"
               class="mb-4"
               icon-size="is-medium"
