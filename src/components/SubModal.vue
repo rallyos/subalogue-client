@@ -49,7 +49,6 @@
               <b-field label="Billing Date">
                   <b-datepicker
                       placeholder="Billing Date"
-                      :locale="undefined"
                       icon="calendar-alt"
                       v-model="sub.billing_date"
                       icon-pack="fal">

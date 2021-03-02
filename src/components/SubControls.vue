@@ -25,9 +25,9 @@ export default {
   box-shadow: none !important;
 }
 .light-hover-only.is-danger:hover {
-  color: #8c001c !important;
+  color: #8c001c;
 }
 .light-hover-only.is-info:hover {
-  color: #003775 !important;
+  color: #003775;
 }
 </style>
