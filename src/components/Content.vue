@@ -103,6 +103,12 @@ export default {
             "data-field": "price"
           }
         },
+        { name: "Recurring" },
+        {
+          id: 'billing_date',
+          name: "Billing date",
+          formatter: (cell) => new Date(cell).toLocaleDateString()
+        },
         { name: "",
           formatter: (cell, row) => {
             const current = this.$gridjs.uuid()

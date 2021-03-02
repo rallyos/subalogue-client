@@ -8,7 +8,7 @@
         aria-role="dialog"
         aria-modal>
         <template #default="props">
-            <SubModal :sub="sub" action="create" @close="props.close"/>
+            <SubModal :sub="{}" action="create" @close="props.close"/>
         </template>
     </b-modal>
     <img alt="Subalogue logo" class="pt-4 pb-5" id="logo" src="@/assets/logo.png" width="40" height="40">
@@ -32,8 +32,7 @@ import SubModal from './SubModal.vue'
 export default {
   name: 'sidebar',
   data: () => ({
-    isComponentModalActive: false,
-    sub: {}
+    isComponentModalActive: false
   }),
   props: {},
   components: {

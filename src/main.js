@@ -35,7 +35,7 @@ const store = new Vuex.Store({
     subscriptionsToRows: state => {
       var rows = [];
       state.subscriptions.forEach(function(sub) {
-        rows.push({name: sub.name, url: sub.url, price: sub.price})
+        rows.push(sub)
       });
       return rows
     },
@@ -69,6 +69,7 @@ const store = new Vuex.Store({
         .then(response => (
           response.data.subscriptions.forEach(function(sub) {
             sub.price = currency(sub.price, { fromCents: true }).value;
+            sub.billing_date = new Date(sub.billing_date)
           }),
           context.commit('addMany', response.data.subscriptions)
         ))
@@ -81,6 +82,7 @@ const store = new Vuex.Store({
         withCredentials: true,
         }).then(response => (
           response.data.price = currency(response.data.price, { fromCents: true }).value,
+          response.data.billing_date = new Date(response.data.billing_date),
           context.commit('addOne', response.data)
         ));
     },
@@ -95,6 +97,7 @@ const store = new Vuex.Store({
         withCredentials: true,
         }).then(response => (
           response.data.price = currency(response.data.price, { fromCents: true }).value,
+          response.data.billing_date = new Date(response.data.billing_date),
           context.commit('update', response.data)
         ));
     },
