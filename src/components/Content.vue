@@ -1,27 +1,20 @@
 <template>
   <section class="h-100">
     <section class="content-top">
-        <b-modal
-            v-model="isComponentModalActive"
-            has-modal-card
-            trap-focus
-            :destroy-on-hide="true"
-            aria-role="dialog"
-            aria-modal>
-            <template #default="props">
-                <SubModal :sub="sub" @close="props.close"/>
-            </template>
-        </b-modal>
     </section>
     <section class="hero grid-container pt-2 px-5 h-100 is-scrollable">
         <div class="level">
           <div class="level-left">
             <div class="level-item">
-              <b-icon
-                  pack="far"
-                  icon="stream"
-                  size="is-medium"/>
               <span class="pr-2 is-size-5">Subscriptions</span>
+
+              <b-button rounded
+                :hovered="inlineSubForm"
+                icon-pack="fal"
+                icon-left="layer-plus"
+                @click="inlineSubForm = !inlineSubForm; sub = {}" >
+                Add
+              </b-button>
             </div>
           </div>
           <div class="level-right">
@@ -35,7 +28,8 @@
             <!-- </b&#45;field> -->
           </div>
         </div>
-      <div class="hero-head">
+      <div class="hero-head" style="height: 50px">
+        <SubEditor v-if="inlineSubForm" :sub="sub"/>
       </div>
       <div v-if="!subscriptions.length" class="empty-state-bg"></div>
       <div class="hero-body pt-0 px-0" v-if="subscriptions.length">
@@ -52,7 +46,7 @@
 import axios from 'axios';
 import currency from 'currency.js'
 import Footer from './Footer.vue'
-import SubModal from './SubModal.vue'
+import SubEditor from './SubEditor.vue'
 import SubControls from './SubControls.vue'
 
 export default {
@@ -80,7 +74,7 @@ export default {
         var sub = this.$store.getters.findSubByName(subName)
 
         this.sub = Object.assign({}, sub)
-        this.isComponentModalActive = true;
+        this.inlineSubForm = true;
       }
     },
     getSubscriptions: function() {
@@ -89,12 +83,12 @@ export default {
   },
   components: {
     Footer,
-    SubModal
+    SubEditor
   },
   data() {
     this.getSubscriptions()
     return {
-      isComponentModalActive: false,
+      inlineSubForm: false,
       cols: [
         { name: "Name", formatter: (cell, row) => this.$gridjs.html(`<img width="16" height="16" class="favico" src="${row.cells[1].data}/favicon.ico"> <span>${cell}</span>`) },
         { name: "Url", formatter: (cell) => this.$gridjs.html(`<a href="${cell}" target="_blank" rel="noopener noreferrer">${cell}</a>`) },

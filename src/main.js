@@ -11,7 +11,7 @@ import Landing from './Landing.vue'
 import App from './App.vue'
 import {version} from '../package.json';
 
-const API_BASE_URL = process.env.NODE_ENV == 'development' ? "http://localhost:8000" : "https://subalogue.shiftingphotons.dev"
+const API_BASE_URL = process.env.NODE_ENV == 'development' ? "http://localhost:3000" : "https://subalogue.shiftingphotons.dev"
 
 Vue.use(Vuex)
 Vue.use(GridGlobal)
