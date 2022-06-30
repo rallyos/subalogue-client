@@ -17,8 +17,8 @@ npm install
 Make sure that the [API](https://github.com/shiftingphotons/subalogue) is running.
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+$ npm run serve -- --port 8000
 
 App running at:
-  - Local:   http://localhost:3000/
+  - Local:   http://localhost:8000/
 ```
