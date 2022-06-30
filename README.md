@@ -20,5 +20,5 @@ Make sure that the [API](https://github.com/shiftingphotons/subalogue) is runnin
 npm run serve
 
 App running at:
-  - Local:   http://localhost:8080/
+  - Local:   http://localhost:3000/
 ```
